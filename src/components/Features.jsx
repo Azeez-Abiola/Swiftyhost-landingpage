@@ -1,47 +1,74 @@
-import React from 'react';
-import { Server, Globe, Shield } from 'lucide-react';
-
-const Feature = ({ icon: Icon, title, description }) => (
-  <div className="flex flex-col items-center text-center">
-    <div className="bg-indigo-100 p-3 rounded-full mb-4">
-      <Icon className="w-6 h-6 text-indigo-600" />
-    </div>
-    <h3 className="text-lg font-semibold mb-2">{title}</h3>
-    <p className="text-gray-600">{description}</p>
-  </div>
-);
-
-const Features = () => {
-  const features = [
+const services = [
     {
-      icon: Server,
-      title: 'High-Performance Servers',
-      description: 'Lightning-fast servers optimized for maximum uptime and speed.',
+      title: "Shared Hosting",
+      description: "Get fast and secure hosting for small & medium sites.",
+      image: "/placeholder.svg?height=150&width=150",
     },
     {
-      icon: Globe,
-      title: 'Global CDN',
-      description: 'Content delivery network for faster loading times worldwide.',
+      title: "Cloud Hosting",
+      description: "Choose managed cloud for high-performing sites.",
+      image: "/placeholder.svg?height=150&width=150",
     },
     {
-      icon: Shield,
-      title: 'Advanced Security',
-      description: 'State-of-the-art security measures to keep your website safe.',
-    },
-  ];
-
-  return (
-    <section className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center mb-12">Why Choose Phox Hosting</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <Feature key={index} {...feature} />
-          ))}
+      title: "WordPress Hosting",
+      description: "Manage your WordPress sites easily and with more freedom.",
+      image: "/placeholder.svg?height=150&width=150",
+    }
+  ]
+  
+  export default function HostingServices() {
+    return (
+      <section className="py-20 px-4">
+        <div className="container mx-auto">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <p className="text-[#ff5001] mb-4">
+              Trusted by the owners of 2,000,000 domains
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+              Web Hosting Platform
+            </h2>
+          </div>
+  
+          {/* Services Grid */}
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {services.map((service, index) => (
+              <div key={index} className="text-center">
+                <div className="mb-6 flex justify-center">
+                  <img
+                    src={service.image || "/placeholder.svg"}
+                    alt={service.title}
+                    className="w-48 h-48 object-contain"
+                  />
+                </div>
+                <h3 className="text-xl font-semibold mb-3 text-gray-900">
+                  {service.title}
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  {service.description}
+                </p>
+                <a 
+                  href="#" 
+                  className="inline-flex items-center text-gray-900 font-medium hover:text-[#ff5001] transition-colors"
+                >
+                  Get Started
+                  <svg
+                    className="w-4 h-4 ml-1"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="M12 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
-  );
-};
-
-export default Features;
+      </section>
+    )
+  }

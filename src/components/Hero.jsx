@@ -1,31 +1,103 @@
-import React from 'react';
+import { useState } from 'react'
 
-const Hero = () => {
+export default function Hero() {
+  const [domain, setDomain] = useState('')
+
+  const domainPricing = [
+    { extension: '.com', price: '12.99' },
+    { extension: '.net', price: '12.99' },
+    { extension: '.org', price: '12.99' },
+    { extension: '.club', price: '12.99' },
+  ]
+
   return (
-    <div className="bg-indigo-900 text-white">
-      <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center">
-        <div className="lg:w-1/2 lg:pr-8 mb-8 lg:mb-0">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-4">
-            Fast & Secure Web Hosting
+    <div className="container mx-auto px-4 py-16">
+      <div className="grid lg:grid-cols-2 gap-12 items-center">
+        {/* Left Column */}
+        <div className="space-y-8">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+            SWIFTYHOST: RELIABLE, FAST AND SECURE HOSTING YOU CAN TRUST 
           </h1>
-          <p className="text-xl mb-8">
-            Get your website up and running in minutes with our easy-to-use hosting platform.
+          <p className="text-lg text-gray-600">
+            From securing your Domain to sustaining your sites, Swiftyhost expertise helps all your project reach their potential.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <button className="bg-white text-indigo-900 px-6 py-3 rounded-md text-lg font-semibold hover:bg-indigo-100 transition duration-300">
-              Get Started
-            </button>
-            <button className="border border-white text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-white hover:text-indigo-900 transition duration-300">
-              Learn More
-            </button>
+          
+          {/* Domain Search */}
+          <div className="space-y-6">
+            <div className="flex gap-2">
+              <input
+                type="text"
+                placeholder="example.com"
+                value={domain}
+                onChange={(e) => setDomain(e.target.value)}
+                className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff5001]"
+              />
+              <button className="px-8 py-3 bg-[#ff5001] text-white rounded-lg hover:bg-[#ff5001] transition-colors">
+                Check
+              </button>
+            </div>
+            
+            {/* Domain Pricing */}
+            <div className="flex flex-wrap gap-6">
+              {domainPricing.map((item) => (
+                <div key={item.extension} className="flex items-center gap-1">
+                  <span className="text-[#ff5001]">{item.extension}</span>
+                  <span className="font-semibold">${item.price}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-        <div className="lg:w-1/2">
-          <img src="/hero-image.svg" alt="Web Hosting" className="w-full h-auto" />
+
+        {/* Right Column - Illustration */}
+        <div className="relative">
+          <img
+            src="/assets/HomeScreenMobile.png"
+            alt="Hosting Illustration"
+            className="w-full"
+          />
+          
+          {/* Floating Check Marks */}
+          {[...Array(4)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-8 h-8 bg-green-400 rounded-full flex items-center justify-center"
+              style={{
+                top: `${20 + (i * 25)}%`,
+                left: `${10 + (i * 20)}%`,
+              }}
+            >
+              <svg
+                className="w-4 h-4 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Partner Logos */}
+      <div className="mt-16 border-t pt-12">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 items-center justify-items-center">
+          {[...Array(5)].map((_, i) => (
+            <img
+              key={i}
+              src={`/placeholder.svg?height=40&width=120`}
+              alt={`Partner Logo ${i + 1}`}
+              className="h-8 opacity-60"
+            />
+          ))}
         </div>
       </div>
     </div>
-  );
-};
-
-export default Hero;
+  )
+}
